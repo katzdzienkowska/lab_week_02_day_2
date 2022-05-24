@@ -2,24 +2,24 @@ class Bus:
     def __init__(self, route_number, destination):
         self.route_number = route_number 
         self.destination = destination 
-        self.passenger = 0     
+        self.passengers = []
     
     def drive(self): 
         return "Brum brum"
 
     def passenger_count(self): 
-        return self.passenger
+        return len(self.passengers)
     
-    def pick_up(self, person):
-        self.passenger += 1
+    def pick_up(self, passenger_to_pick_up):
+        self.passengers.append(passenger_to_pick_up)
 
-    def drop_off(self, person):
-        self.passenger -= 1  
+    def drop_off(self, passenger_to_drop_off):
+        self.passengers.remove(passenger_to_drop_off)
     
-    def empty(self):
-        self.passenger = 0 
-        return self.passenger
+    def empty_bus(self):
+        self.passengers.clear() #this method removes all items from the list
     
-    def pick_up_from_stop(self, bus_stop):
-        self.passenger_count = bus_stop.queue_length
-        return self.passenger_count
+    def pick_up_from_stop(self, bus_stop_to_pick_up_from):
+        for passenger in bus_stop_to_pick_up_from.queue:
+            self.passengers.append(passenger)
+        bus_stop_to_pick_up_from.clear()
